@@ -1,0 +1,91 @@
+        .file   "ejer6.cpp"
+        .text
+        .globl  _Z3divii
+        .def    _Z3divii;       .scl    2;      .type   32;     .endef
+        .seh_proc       _Z3divii
+_Z3divii:
+.LFB0:
+        pushq   %rbp
+        .seh_pushreg    %rbp
+        movq    %rsp, %rbp
+        .seh_setframe   %rbp, 0
+        .seh_endprologue
+        movl    %ecx, 16(%rbp)
+        movl    %edx, 24(%rbp)
+        movl    16(%rbp), %eax
+        cltd
+        idivl   24(%rbp)
+        popq    %rbp
+        ret
+        .seh_endproc
+        .globl  _Z4div4i
+        .def    _Z4div4i;       .scl    2;      .type   32;     .endef
+        .seh_proc       _Z4div4i
+_Z4div4i:
+.LFB1:
+        pushq   %rbp
+        .seh_pushreg    %rbp
+        movq    %rsp, %rbp
+        .seh_setframe   %rbp, 0
+        .seh_endprologue
+        movl    %ecx, 16(%rbp)
+        movl    16(%rbp), %eax
+        leal    3(%rax), %edx
+        testl   %eax, %eax
+        cmovs   %edx, %eax
+        sarl    $2, %eax
+        popq    %rbp
+        ret
+        .seh_endproc
+        .def    __main; .scl    2;      .type   32;     .endef
+        .section .rdata,"dr"
+.LC0:
+        .ascii "abcdef\0"
+        .text
+        .globl  main
+        .def    main;   .scl    2;      .type   32;     .endef
+        .seh_proc       main
+main:
+.LFB2:
+        pushq   %rbp
+        .seh_pushreg    %rbp
+        movq    %rsp, %rbp
+        .seh_setframe   %rbp, 0
+        subq    $64, %rsp
+        .seh_stackalloc 64
+        .seh_endprologue
+        call    __main
+        leaq    .LC0(%rip), %rax
+        movq    %rax, -8(%rbp)
+        movl    $11148, -12(%rbp)
+        movl    -12(%rbp), %eax
+        leal    7(%rax), %edx
+        testl   %eax, %eax
+        cmovs   %edx, %eax
+        sarl    $3, %eax
+        movl    %eax, -16(%rbp)
+        movl    -12(%rbp), %eax
+        leal    3(%rax), %edx
+        testl   %eax, %eax
+        cmovs   %edx, %eax
+        sarl    $2, %eax
+        movl    %eax, -20(%rbp)
+        movl    -12(%rbp), %eax
+        movl    %eax, %edx
+        shrl    $31, %edx
+        addl    %edx, %eax
+        sarl    %eax
+        movl    %eax, -24(%rbp)
+        movl    $4, %edx
+        movl    $5, %ecx
+        call    _Z3divii
+        movl    %eax, -28(%rbp)
+        movl    $5, %ecx
+        call    _Z4div4i
+        movl    %eax, -32(%rbp)
+        movl    $0, %eax
+        addq    $64, %rsp
+        popq    %rbp
+        ret
+        .seh_endproc
+        .ident  "GCC: (GNU) 11.2.0"
